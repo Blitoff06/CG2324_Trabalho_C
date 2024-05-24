@@ -566,7 +566,7 @@ function createFloor() {
 }
 
 function createSkydome() {
-  const textureURL = "../assets/an_optical_poem.PNG";
+  const textureURL = "./docs/assets/images/an_optical_poem.PNG";
 
   const skyDome = skydomeGeometryConstructor(skydome_radius, textureURL);
   scene.add(skyDome);
