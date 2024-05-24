@@ -45,7 +45,7 @@ var keyWasntProcessed = {};
 
 const rings_height = 1;
 const rings_width = 3;
-const pole_radius = 1;
+const pole_radius = 2;
 const pole_height = 15;
 const min_height_ring = 0;
 const max_height_ring = pole_height - 2;
@@ -53,7 +53,7 @@ const skydome_radius = 40;
 const mobius_radius = 10;
 const mobius_width = 4;
 
-const levels_speed = 6;
+const levels_speed = 5;
 const figures_speed = 3;
 const carousel_speed = 0.5;
 
@@ -164,15 +164,15 @@ function onResize() {
 
 function onKeyDown(e) {
   switch (e.keyCode) {
-    case 49: //1 frontalCamera
+    case 49: //1
     case 97: //1 numpad
       down_1 = true;
       break;
-    case 50: //2 lateralCamera
+    case 50: //2
     case 98: //2 numpad
       down_2 = true;
       break;
-    case 51: //3 aboveCamera
+    case 51: //3
     case 99: //3 numpad
       down_3 = true;
       break;
@@ -266,14 +266,14 @@ function onKeyUp(e) {
 
 function handleKey1(deltaTime) {
   if (going_up[0]) {
-    if (innerLevel.position.y < max_height_ring) {
+    if (innerLevel.position.y < max_height_ring - 2) {
       innerLevel.position.y += levels_speed * deltaTime;
     } else {
       going_up[0] = false;
       innerLevel.position.y -= levels_speed * deltaTime;
     }
   } else {
-    if (innerLevel.position.y >= min_height_ring) {
+    if (innerLevel.position.y >= min_height_ring + 2) {
       innerLevel.position.y -= levels_speed * deltaTime;
     } else {
       going_up[0] = true;
@@ -284,7 +284,7 @@ function handleKey1(deltaTime) {
 
 function handleKey2(deltaTime) {
   if (going_up[1]) {
-    if (middleLevel.position.y < max_height_ring - 5) {
+    if (middleLevel.position.y < max_height_ring - 7) {
       // 5 == middle ring's initial y value
       middleLevel.position.y += levels_speed * deltaTime;
     } else {
@@ -292,7 +292,7 @@ function handleKey2(deltaTime) {
       middleLevel.position.y -= levels_speed * deltaTime;
     }
   } else {
-    if (middleLevel.position.y >= min_height_ring - 5) {
+    if (middleLevel.position.y >= min_height_ring - 3) {
       middleLevel.position.y -= levels_speed * deltaTime;
     } else {
       going_up[1] = true;
@@ -303,7 +303,7 @@ function handleKey2(deltaTime) {
 
 function handleKey3(deltaTime) {
   if (going_up[2]) {
-    if (outterLevel.position.y < max_height_ring - 10) {
+    if (outterLevel.position.y < max_height_ring - 12) {
       // 10 == outter ring's initial y value
       outterLevel.position.y += levels_speed * deltaTime;
     } else {
@@ -311,7 +311,7 @@ function handleKey3(deltaTime) {
       outterLevel.position.y -= levels_speed * deltaTime;
     }
   } else {
-    if (outterLevel.position.y >= min_height_ring - 10) {
+    if (outterLevel.position.y >= min_height_ring - 8) {
       outterLevel.position.y -= levels_speed * deltaTime;
     } else {
       going_up[2] = true;
@@ -375,7 +375,7 @@ function handleKeyQ() {
     i++;
   }
   for (let mesh of meshesFigures) {
-    mesh.material = meshesLambertMaterial[4];
+    mesh.material = meshesLambertMaterial[5];
     i++;
   }
 }
@@ -388,7 +388,7 @@ function handleKeyW() {
     i++;
   }
   for (let mesh of meshesFigures) {
-    mesh.material = meshesPhongMaterial[4];
+    mesh.material = meshesPhongMaterial[5];
     i++;
   }
 }
@@ -401,7 +401,7 @@ function handleKeyE() {
     i++;
   }
   for (let mesh of meshesFigures) {
-    mesh.material = meshesToonMaterial[4];
+    mesh.material = meshesToonMaterial[5];
     i++;
   }
 }
@@ -414,7 +414,7 @@ function handleKeyR() {
     i++;
   }
   for (let mesh of meshesFigures) {
-    mesh.material = meshesNormalMaterial[4];
+    mesh.material = meshesNormalMaterial[5];
     i++;
   }
 }
@@ -428,7 +428,7 @@ function handleKeyT_Basic() {
 
   i = 0;
   for (let mesh of meshesFigures) {
-    mesh.material = meshesBasicMaterial[4];
+    mesh.material = meshesBasicMaterial[5];
     i++;
   }
 }
@@ -450,12 +450,12 @@ function createMaterials() {
   meshesBasicMaterial.push(new THREE.MeshBasicMaterial({ color: 0xf4d211 }));
 
   meshesLambertMaterial.push(
-    new THREE.MeshLambertMaterial({ color: 0xf00000 })
+    new THREE.MeshLambertMaterial({ color: 0xffff00 })
   );
-  meshesPhongMaterial.push(new THREE.MeshPhongMaterial({ color: 0xf00000 }));
-  meshesToonMaterial.push(new THREE.MeshToonMaterial({ color: 0xf00000 }));
+  meshesPhongMaterial.push(new THREE.MeshPhongMaterial({ color: 0xffff00 }));
+  meshesToonMaterial.push(new THREE.MeshToonMaterial({ color: 0xffff00 }));
   meshesNormalMaterial.push(new THREE.MeshNormalMaterial());
-  meshesBasicMaterial.push(new THREE.MeshBasicMaterial({ color: 0xf00000 }));
+  meshesBasicMaterial.push(new THREE.MeshBasicMaterial({ color: 0xffff00 }));
 
   meshesLambertMaterial.push(
     new THREE.MeshLambertMaterial({ color: 0x0000f0 })
@@ -472,6 +472,22 @@ function createMaterials() {
   meshesToonMaterial.push(new THREE.MeshToonMaterial({ color: 0x00f000 }));
   meshesNormalMaterial.push(new THREE.MeshNormalMaterial());
   meshesBasicMaterial.push(new THREE.MeshBasicMaterial({ color: 0x00f000 }));
+
+  meshesLambertMaterial.push(
+    new THREE.MeshLambertMaterial({ color: 0x00ffff, side: THREE.DoubleSide })
+  );
+  meshesPhongMaterial.push(
+    new THREE.MeshPhongMaterial({ color: 0x00ffff, side: THREE.DoubleSide })
+  );
+  meshesToonMaterial.push(
+    new THREE.MeshToonMaterial({ color: 0x00ffff, side: THREE.DoubleSide })
+  );
+  meshesNormalMaterial.push(
+    new THREE.MeshNormalMaterial({ side: THREE.DoubleSide })
+  );
+  meshesBasicMaterial.push(
+    new THREE.MeshBasicMaterial({ color: 0x00ffff, side: THREE.DoubleSide })
+  );
 
   meshesLambertMaterial.push(
     new THREE.MeshLambertMaterial({ color: 0xff0000, side: THREE.DoubleSide })
@@ -498,7 +514,7 @@ function setCamera() {
     1000
   );
   camera.position.x = 20;
-  camera.position.y = 15;
+  camera.position.y = 5;
   camera.position.z = 20;
   camera.lookAt(scene.position);
   currentCamera = camera;
@@ -507,7 +523,7 @@ function setCamera() {
 function createScene() {
   scene = new THREE.Scene();
   scene.add(new THREE.AxesHelper(10));
-  createCarousel(0, 0, 0);
+  createCarousel(0, -pole_height / 2, 0);
   createFloor();
   createSkydome();
   createChandelier(0, 0, 0);
@@ -545,12 +561,12 @@ function createFloor() {
   });
 
   const floor = new THREE.Mesh(geometry, material);
-  floor.position.set(0, -1.5, 0); // Center the floor between x=-1 and x=0
+  floor.position.set(0, -1.5 - pole_height / 2, 0); // Center the floor between x=-1 and x=0
   scene.add(floor);
 }
 
 function createSkydome() {
-  const textureURL = "./docs/assets/images/an_optical_poem.PNG";
+  const textureURL = "../assets/an_optical_poem.PNG";
 
   const skyDome = skydomeGeometryConstructor(skydome_radius, textureURL);
   scene.add(skyDome);
@@ -642,12 +658,11 @@ function addMobiusStrip(obj, ox, oy, oz, obj_color) {
     color: obj_color,
     wireframe: false,
     side: THREE.DoubleSide,
-    //roughness: 1, // Default is 1.0, lower values make it shinier
-    //metalness: 0, // Default is 0.0, higher values make it look metallic
   });
 
   const mobiusStrip = new THREE.Mesh(geometry, material);
-  mobiusStrip.position.set(ox, oy, oz);
+  meshes.push(mobiusStrip);
+  mobiusStrip.position.set(ox, oy - pole_height / 2, oz);
   mobiusStrip.rotation.x += Math.PI / 2;
 
   obj.add(mobiusStrip);
@@ -665,14 +680,12 @@ function addPointLights(obj, ox, oy, oz) {
     pointLight.castShadow = true;
 
     pointLight.position.set(
-      ox + (mobius_radius - 1) * Math.cos(angle),
-      oy - 1,
-      oz + (mobius_radius - 1) * Math.sin(angle)
+      ox + mobius_radius * Math.cos(angle),
+      oy - pole_height / 2,
+      oz + mobius_radius * Math.sin(angle)
     );
 
     pointLights.push(pointLight);
-    var pointlighthelper = new THREE.PointLightHelper(pointLight, 1);
-    obj.add(pointlighthelper);
 
     obj.add(pointLight);
   }
@@ -717,6 +730,7 @@ function skydomeGeometryConstructor(radius, textureURL) {
   });
 
   const skyDome = new THREE.Mesh(geometry, material);
+  skyDome.position.set(0, -pole_height / 2, 0);
 
   return skyDome;
 }
@@ -741,19 +755,6 @@ function ringGeometryConstructor(outerRadius, innerRadius, height) {
   return new THREE.ExtrudeGeometry(shape, extrudeSettings);
 }
 
-//function poleGeometryConstructor(pole_radius, pole_height) {
-//  const path = new THREE.LineCurve3(
-//    new THREE.Vector3(0, 0, 0), // Start point
-//    new THREE.Vector3(0, pole_height, 0) // End point
-//  );
-//
-//  // Define the radius and number of segments for the tube geometry
-//  const radius = pole_radius;
-//  const segments = 32;
-//
-//  return new THREE.TubeGeometry(path, segments, radius, segments, false);
-//}
-
 function addCarouselPole(obj, ox, oy, oz) {
   var tubeGeometry = new THREE.CylinderGeometry(
     pole_radius,
@@ -761,10 +762,6 @@ function addCarouselPole(obj, ox, oy, oz) {
     pole_height / 2,
     32
   );
-  //const tubeGeometry = poleGeometryConstructor(
-  //  pole_radius,
-  //  (pole_height * 2) / 3
-  //);
 
   // Create material for the tube
   const material = new THREE.MeshStandardMaterial({
@@ -812,8 +809,6 @@ function addFigures(
     const figure = new THREE.Mesh(geometry, material);
     figure.scale.set(scale, scale, scale);
     figure.rotateZ(rotAngle);
-    //figure.castShadow = true; /////
-    //figure.receiveShadow = false; /////
     meshesFigures.push(figure);
 
     figure.position.set(
@@ -830,12 +825,9 @@ function addFigures(
       oz + ((r_innerRadius + r_outerRadius) / 2) * Math.sin(angle)
     );
     spotlight.target = figure;
-    //spotlight.castShadow = true; /////
-    //Add spotlight helper
-    const spotLightHelper = new THREE.SpotLightHelper(spotlight);
+
     spotLights.push(spotlight);
 
-    obj.add(spotLightHelper);
     obj.add(figure);
     obj.add(spotlight);
 
@@ -852,7 +844,6 @@ function addRing(obj, ox, oy, oz, outerRadius, innerRadius, height, obj_color) {
   });
 
   var ring = new THREE.Mesh(geometry, material);
-  //ring.receiveShadow = true; /////
   meshes.push(ring);
   ring.position.set(ox, oy, oz);
   ring.rotation.x = Math.PI / 2;
@@ -1053,6 +1044,5 @@ function animate() {
   update(deltaTime);
   render();
 
-  //requestAnimationFrame(animate);
   renderer.setAnimationLoop(animate);
 }
