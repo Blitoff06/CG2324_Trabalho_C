@@ -1022,6 +1022,12 @@ function checkKeystrokeUpdate(deltaTime) {
   }
 }
 
+function moveRings(deltaTime) {
+  handleKey1(deltaTime);
+  handleKey2(deltaTime);
+  handleKey3(deltaTime);
+}
+
 function rotateFigures(deltaTime) {
   for (var i = 0; i < figures.length; i++) {
     figures[i].rotation.y += figures_speed * deltaTime;
@@ -1036,6 +1042,7 @@ function update(deltaTime) {
   checkKeystrokeUpdate(deltaTime);
   rotateFigures(deltaTime);
   rotateCarousel(deltaTime);
+  moveRings(deltaTime);
 }
 
 function animate() {
